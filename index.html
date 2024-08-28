@@ -38,6 +38,27 @@
                 <button class="btn btn-danger">Kaydet</button>
             </div>
         </form>
+        <br>
+        <form id="add-form" class="d-flex gap-2">
+            <input id="income-input" class="form-control" type="number" step="0.01" min="0" autofocus
+                placeholder="enter your income">
+            <button class="btn btn-success" type="submit">Add</button>
+        </form>
+        <table class="table table-bordered table-hover table-striped mt-4 text-center">
+            <thead>
+                <tr>
+                    <th scope="col" class="w-25">Date</th>
+                    <th scope="col" class="w-50">Payment Area</th>
+                    <th scop="col">Quantity(€)</th>
+                    <th scop="col">Process</th>
+                </tr>
+            </thead>
+            <tbody id="payment-body">
+
+            </tbody>
+
+        </table>
+
 
     </main>
 </body>
