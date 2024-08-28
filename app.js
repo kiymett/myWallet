@@ -53,3 +53,11 @@ paymentForm.addEventListener("submit", (e) => {
     localStorage.setItem("payments", JSON.stringify(paymentList))
 })
 
+// Window first loaded
+
+window.addEventListener('load', () => {
+    income = Number(localStorage.getItem('incomes')) || 0
+    incomeTd.innerText = income
+
+})
+
