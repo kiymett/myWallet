@@ -12,9 +12,16 @@ const incomeTd = document.getElementById('income')
 const expensesTd = document.getElementById('expenses')
 const remaining = document.getElementById('remaining')
 
+//Payment selectors
+
+const date = document.getElementById('date')
+const quantity = document.getElementById('quantity')
+const paymentOfMod = document.getElementById('payment-area')
+
 // variable
 
 let income = 0;
+let paymentList = []
 
 //Add Income
 
@@ -28,4 +35,21 @@ addForm.addEventListener("submit", (e) => {
 })
 
 //Payment Form
+
+paymentForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    console.log('add payment')
+    const payments = {
+        id: new Date().getTime(),
+        date: date.value,
+        quantity: quantity.value,
+        paymentOfMod: paymentOfMod.value
+    }
+
+    console.log(payments)
+    paymentForm.reset()
+    paymentList.push(payments)
+    console.log(paymentList)
+    localStorage.setItem("payments", JSON.stringify(paymentList))
+})
 
