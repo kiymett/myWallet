@@ -56,6 +56,7 @@ paymentForm.addEventListener("submit", (e) => {
     console.log(paymentList)
     localStorage.setItem("payments", JSON.stringify(paymentList))
     paymentWriteDOM(payments)
+
 })
 
 // Window first loaded
@@ -63,6 +64,8 @@ paymentForm.addEventListener("submit", (e) => {
 window.addEventListener('load', () => {
     income = Number(localStorage.getItem('incomes')) || 0
     incomeTd.innerText = income
+    payment = JSON.parse(localStorage.getItem('payments')) || []
+    payment.forEach((pay) => paymentWriteDOM(pay))
 
 })
 
