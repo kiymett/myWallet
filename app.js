@@ -18,7 +18,11 @@ const date = document.getElementById('date')
 const quantity = document.getElementById('quantity')
 const paymentOfMod = document.getElementById('payment-area')
 
-// variable
+//Payment Body
+
+const paymentBody = document.getElementById('payment-body')
+
+// variables
 
 let income = 0;
 let paymentList = []
@@ -51,6 +55,7 @@ paymentForm.addEventListener("submit", (e) => {
     paymentList.push(payments)
     console.log(paymentList)
     localStorage.setItem("payments", JSON.stringify(paymentList))
+    paymentWriteDOM(payments)
 })
 
 // Window first loaded
@@ -60,4 +65,21 @@ window.addEventListener('load', () => {
     incomeTd.innerText = income
 
 })
+
+
+// Payment Area
+
+const paymentWriteDOM = ({ id, date, quantity, paymentOfMod }) => {
+
+    paymentBody.innerHTML += `
+    <tr>
+    <td>${date}</td>
+    <td>${quantity}</td>
+    <td>${paymentOfMod}</td>
+    <td> <i id=${id} class="fa-solid fa-trash-can text-danger" type="danger" >
+    </i>
+    </td>
+    </tr>
+    `
+}
 
