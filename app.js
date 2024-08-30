@@ -100,7 +100,7 @@ const calculateAndUpdate = () => {
     const expenses = paymentList.reduce(
         (toplam, pay) => toplam + Number(pay.quantity), 0
     )
-    console.log(expenses)
+
     expensesTd.innerText = expenses
     remaining.innerText = (income - expenses)
 
@@ -115,5 +115,17 @@ const calculateAndUpdate = () => {
         if (e.target.classList.contains("fa-trash-can")) {
             e.target.parentElement.parentElement.remove()
         }
+
+        const id = e.target.id
+        console.log(id)
+
+        // deleted output ist deleted from the list 
+
+        paymentList = paymentList.filter(pay => pay.id != id)
+        console.log(paymentList)
+
+        localStorage.setItem('paymentss', JSON.stringify(paymentList))
+
+        calculateAndUpdate()
     })
 }
