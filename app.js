@@ -107,4 +107,13 @@ const calculateAndUpdate = () => {
     const debtor = income - expenses < 0;
     remaining.classList.toggle('text-danger', debtor)
     remainingTh.classList.toggle('text-danger', debtor)
+
+
+
+    paymentBody.addEventListener('click', (e) => {
+        console.log(e.target)
+        if (e.target.classList.contains("fa-trash-can")) {
+            e.target.parentElement.parentElement.remove()
+        }
+    })
 }
