@@ -23,6 +23,10 @@ const paymentOfMod = document.getElementById('payment-area')
 
 const paymentBody = document.getElementById('payment-body')
 
+// Clear Button
+
+const clearBtn = document.getElementById('clear-btn')
+
 // variables
 
 let income = 0;
@@ -129,3 +133,20 @@ const calculateAndUpdate = () => {
         calculateAndUpdate()
     })
 }
+
+//delete all of them
+
+clearBtn.addEventListener('click', (e) => {
+    if (confirm('Do you want to delete aall of them?')) {
+        income = 0
+        paymentList = []
+        paymentBody.innerHTML = ''
+        // localStorage.clear()
+        localStorage.removeItem('income')
+        localStorage.removeItem('expense')
+        calculateAndUpdate()
+    }
+
+
+})
+
