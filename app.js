@@ -11,6 +11,7 @@ const incomeInput = document.getElementById('income-input')
 const incomeTd = document.getElementById('income')
 const expensesTd = document.getElementById('expenses')
 const remaining = document.getElementById('remaining')
+const remainingTh = document.getElementById('remainingTh')
 
 //Payment selectors
 
@@ -46,16 +47,17 @@ paymentForm.addEventListener("submit", (e) => {
     const payments = {
         id: new Date().getTime(),
         date: date.value,
+        paymentOfMod: paymentOfMod.value,
         quantity: quantity.value,
-        paymentOfMod: paymentOfMod.value
     }
 
     console.log(payments)
     paymentForm.reset()
     paymentList.push(payments)
     console.log(paymentList)
-    localStorage.setItem("payments", JSON.stringify(paymentList))
+    localStorage.setItem("paymentss", JSON.stringify(paymentList))
     paymentWriteDOM(payments)
+    calculateAndUpdate()
 
 })
 
@@ -64,8 +66,10 @@ paymentForm.addEventListener("submit", (e) => {
 window.addEventListener('load', () => {
     income = Number(localStorage.getItem('incomes')) || 0
     incomeTd.innerText = income
-    payment = JSON.parse(localStorage.getItem('payments')) || []
+    date.valueAsDate = new Date()
+    payment = JSON.parse(localStorage.getItem('paymentss')) || []
     payment.forEach((pay) => paymentWriteDOM(pay))
+    calculateAndUpdate()
 
 })
 
@@ -77,8 +81,8 @@ const paymentWriteDOM = ({ id, date, quantity, paymentOfMod }) => {
     paymentBody.innerHTML += `
     <tr>
     <td>${date}</td>
-    <td>${quantity}</td>
     <td>${paymentOfMod}</td>
+    <td>${quantity}</td>
     <td> <i id=${id} class="fa-solid fa-trash-can text-danger" type="danger" >
     </i>
     </td>
@@ -86,3 +90,21 @@ const paymentWriteDOM = ({ id, date, quantity, paymentOfMod }) => {
     `
 }
 
+// Calculate and Update 
+
+
+const calculateAndUpdate = () => {
+
+    incomeTd.innerText = income;
+
+    const expenses = paymentList.reduce(
+        (toplam, pay) => toplam + Number(pay.quantity), 0
+    )
+    console.log(expenses)
+    expensesTd.innerText = expenses
+    remaining.innerText = (income - expenses)
+
+    const debtor = income - expenses < 0;
+    remaining.classList.toggle('text-danger', debtor)
+    remainingTh.classList.toggle('text-danger', debtor)
+}
